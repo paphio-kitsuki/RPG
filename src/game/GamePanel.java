@@ -151,9 +151,9 @@ public class GamePanel extends FreezePanel implements ChosenListener {
 						if (now - startTime >= (double) 1000 / FPS) {
 							nowFPS = (double) 1000 / (now - startTime);
 							if (now - startTime >= (double) 1000 / FPS * 1.5 && FPS > 30)
-								FPS -= 5;
+								FPS -= 5; // 描画処理に時間がかかっているとき(1フレーム更新にFPS * 1.5倍以上かかっているとき)、FPSを下げる。下限は30。
 							else if (now - startTime <= (double) 1000 / FPS * 1.1 && FPS < 60)
-								FPS += 5;
+								FPS += 5; // FPSの初期値は60だが、上でFPSを下げていたとき、描画処理に時間がかからなくなってきたら(1フレーム更新にFPS * 1.1倍以下だったら)、FPSをあげる。上限は60。
 							startTime += (double) 1000 / FPS;
 							if (isFinished && keyList.containsEnter()) {
 								removeAll();
