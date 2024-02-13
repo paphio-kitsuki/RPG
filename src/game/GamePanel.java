@@ -592,7 +592,7 @@ public class GamePanel extends FreezePanel implements ChosenListener {
 		}
 		tmpFPS += nowFPS;
 		tmpCount++;
-		double now = System.currentTimeMillis();
+		long now = System.currentTimeMillis();
 		if (updateTime + 1000 <= now) {
 			updateTime = now;
 			printFPS = tmpFPS / (double) tmpCount;
