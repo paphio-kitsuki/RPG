@@ -113,20 +113,22 @@ public class ChooseListLabel extends MovingChooseLabel {
 			return;
 		if (!(e.containsUp() && e.containsDown())) {
 			if (e.containsUp()) {
+				long now = System.currentTimeMillis();
 				if (!pastKeyList.containsKey(KeyEvent.VK_UP)
-						|| pastKeyList.get(KeyEvent.VK_UP) + resetTime <= System.currentTimeMillis()) {
+						|| pastKeyList.get(KeyEvent.VK_UP) + resetTime <= now) {
 					pastKeyList.remove(KeyEvent.VK_UP);
-					pastKeyList.put(KeyEvent.VK_UP, System.currentTimeMillis());
+					pastKeyList.put(KeyEvent.VK_UP, now);
 					addIndexCount(-1);
 				}
 			} else {
 				pastKeyList.remove(KeyEvent.VK_UP);
 			}
 			if (e.containsDown()) {
+				long now = System.currentTimeMillis();
 				if (!pastKeyList.containsKey(KeyEvent.VK_DOWN)
-						|| pastKeyList.get(KeyEvent.VK_DOWN) + resetTime <= System.currentTimeMillis()) {
+						|| pastKeyList.get(KeyEvent.VK_DOWN) + resetTime <= now) {
 					pastKeyList.remove(KeyEvent.VK_DOWN);
-					pastKeyList.put(KeyEvent.VK_DOWN, System.currentTimeMillis());
+					pastKeyList.put(KeyEvent.VK_DOWN, now);
 					addIndexCount(1);
 				}
 			} else {

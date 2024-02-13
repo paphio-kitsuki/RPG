@@ -143,15 +143,16 @@ public class GamePanel extends FreezePanel implements ChosenListener {
 					}
 
 					try {
-						if (wipe != null && System.currentTimeMillis() - nowWipe >= wipeTime)
+						long now = System.currentTimeMillis();
+						if (wipe != null && now - nowWipe >= wipeTime)
 							doWipe();
-						if (isEffecting() && System.currentTimeMillis() - nowCurtain >= curtainTime)
+						if (isEffecting() && now - nowCurtain >= curtainTime)
 							doCurtain();
-						if (System.currentTimeMillis() - startTime >= (double) 1000 / FPS) {
-							nowFPS = (double) 1000 / (System.currentTimeMillis() - startTime);
-							if (System.currentTimeMillis() - startTime >= (double) 1000 / FPS * 1.5 && FPS > 30)
+						if (now - startTime >= (double) 1000 / FPS) {
+							nowFPS = (double) 1000 / (now - startTime);
+							if (now - startTime >= (double) 1000 / FPS * 1.5 && FPS > 30)
 								FPS -= 5;
-							else if (System.currentTimeMillis() - startTime <= (double) 1000 / FPS * 1.1 && FPS < 60)
+							else if (now - startTime <= (double) 1000 / FPS * 1.1 && FPS < 60)
 								FPS += 5;
 							startTime += (double) 1000 / FPS;
 							if (isFinished && keyList.containsEnter()) {
@@ -591,8 +592,9 @@ public class GamePanel extends FreezePanel implements ChosenListener {
 		}
 		tmpFPS += nowFPS;
 		tmpCount++;
-		if (updateTime + 1000 <= System.currentTimeMillis()) {
-			updateTime = System.currentTimeMillis();
+		double now = System.currentTimeMillis();
+		if (updateTime + 1000 <= now) {
+			updateTime = now;
 			printFPS = tmpFPS / (double) tmpCount;
 			tmpFPS = 0;
 			tmpCount = 0;
